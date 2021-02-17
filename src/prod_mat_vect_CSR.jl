@@ -4,7 +4,7 @@ main:
 - Author: mathd
 - Date: 2021-02-16
 =#
-
+include("matrixCSR.jl")
 import Pkg
 
 #print("Test")
@@ -12,9 +12,9 @@ import Pkg
 A = [3 1 0 2; 4 0 0 3; 1 2 0 0; 0 0 3 1]
 #Réponse : A*X = [7 ; 8 ; 4 ; 3]
 
-indc = [1 2 4 1 4 1 2 3 4]
-data = [3 1 2 4 3 1 2 3 1]
-indpl = [1 4 6 8 10]
+# indc = [1 2 4 1 4 1 2 3 4]
+#data = [3 1 2 4 3 1 2 3 1]
+#indpl = [1 4 6 8 10]
 X = [2 1 1 0]
 
 function prod_mat_vect_CSR(n , indpl , indc , data, X)
@@ -40,5 +40,8 @@ function result(X)
     print(result)
 end
 
+
+data, indc, indpl , m , n , A = matrixCSR(A) #On récupère les résultats transposés
+print("Matrice : ", A , "\nSize : ", m , "x", n, "\ndata : ", data , " | indpl : " , indpl , " | indc : " , indc , "\n")
 @time(prod_mat_vect_CSR(4,indpl , indc,data, X))
 @time(result(X))

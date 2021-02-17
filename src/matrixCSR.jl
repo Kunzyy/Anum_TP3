@@ -7,8 +7,8 @@ matrixCSR:
 
 function matrixCSR(A)
 
-    M = size(A,1)
-    N = size(A,2)
+    M,N = size(A)
+
 
     DATA = Int[]
     INDC = Int[]
@@ -26,5 +26,5 @@ function matrixCSR(A)
         append!(INDPL, [indpl])
     end
 
-    return DATA, INDC, INDPL
+    return DATA', INDC', INDPL', M , N , A
 end
