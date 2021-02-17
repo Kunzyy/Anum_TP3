@@ -31,7 +31,7 @@ function grad_meth_CSR(data,indc,indpl,b,X,maxiter,tol)
     end
     return X
 end
-
+#=
 indc = [1 2 4 1 4 1 2 3 4]
 data = [3 1 2 4 3 1 2 3 1]
 indpl = [1 4 6 8 10]
@@ -39,4 +39,6 @@ X = [2 1 1 0]
 b = [4 5 1 3]
 maxiter = 10
 tol = 1e-6
+A = [3 1 0 2; 4 0 0 3; 1 2 0 0; 0 0 3 1]
 @time(println(grad_meth_CSR(data,indc,indpl,b,X,maxiter,tol)))
+println("Function 1 ok") =#

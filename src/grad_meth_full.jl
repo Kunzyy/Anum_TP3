@@ -44,4 +44,3 @@ maxiter = 10
 tol = 1e-6
 A = [3 1 0 2; 4 0 0 3; 1 2 0 0; 0 0 3 1]
 
-@time (println(grad_meth_full(A,b,X,maxiter,tol)))
