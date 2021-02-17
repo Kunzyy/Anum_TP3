@@ -13,7 +13,7 @@ function conj_grad_meth_CSR(data,indc, indpl,b,X,tol)
     m,n = size(b)
     grad_x= prod_mat_vect_CSR(n , indpl , indc , data, X)-b #(1xn) - (1xn) => (1xn)
     d = - grad_x #d(1xn)
-    while k < maxiter
+    while k < n #Car il converge au plus en n itérés
         num = -d*grad_x'
         den = d* (prod_mat_vect_CSR(n , indpl , indc , data, d))'
         alpha = num[1]/den[1] #num et den sont des scalaires mais il sont renvoyés sous forme d'un array 1x1'
