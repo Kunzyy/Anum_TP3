@@ -32,7 +32,8 @@ function prod_mat_vect_CSR(n , indpl , indc , data, X)
         V[i] = temp
         temp = 0
     end
-    print(V)
+    #print("Produit matrice sparse*vecteur : ", V , "\n")
+    return V'
 end
 
 function result(X)
@@ -40,8 +41,9 @@ function result(X)
     print(result)
 end
 
-
+#=
 data, indc, indpl , m , n , A = matrixCSR(A) #On récupère les résultats transposés
 print("Matrice : ", A , "\nSize : ", m , "x", n, "\ndata : ", data , " | indpl : " , indpl , " | indc : " , indc , "\n")
 @time(prod_mat_vect_CSR(4,indpl , indc,data, X))
 @time(result(X))
+=#
