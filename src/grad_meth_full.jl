@@ -17,7 +17,6 @@ function grad_meth_full(A,b,X,maxiter,tol)
         #Calcul du pas
         num = -d'*(A*X-b)
         den = d'*(A*d)
-        println(num , "  ",den)
 
         alpha = num[1]/den[1]
 
@@ -37,10 +36,10 @@ function grad_meth_full(A,b,X,maxiter,tol)
     end
     return X
 end
-
+#=
 X = [2 ;1 ;1 ;0]
 b = [4 ; 5 ; 1 ; 3]
 maxiter = 10
 tol = 1e-6
-A = [3 1 0 2; 4 0 0 3; 1 2 0 0; 0 0 3 1]
+A = [3 1 0 2; 4 0 0 3; 1 2 0 0; 0 0 3 1] =#
 

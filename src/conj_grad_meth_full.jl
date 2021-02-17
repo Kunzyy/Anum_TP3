@@ -34,10 +34,12 @@ function conj_grad_meth_full(A,b,X,tol)
     return X
 end
 
+
+#=
 X = [2 ;1 ;1 ;0]
 b = [4 ; 5 ; 1 ; 3]
 maxiter = 10
 tol = 1e-6
 A = [3 1 0 2; 4 0 0 3; 1 2 0 0; 0 0 3 1]
 
-@time(println(conj_grad_meth_full(A,b,X,tol)))
+@time(println(conj_grad_meth_full(A,b,X,tol))) =#
