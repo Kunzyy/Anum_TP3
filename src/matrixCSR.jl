@@ -17,14 +17,14 @@ function matrixCSR(A)
     for i in 1:M
         for j in 1:N
             if A[i,j] != 0
-                append!(DATA, [A[i,j]])
-                append!(INDC, [j])
+                push!(DATA, A[i,j])
+                push!(INDC, j)
             end
         end
 
         indpl = size(INDC,1) + 1
-        append!(INDPL, [indpl])
+        push!(INDPL, indpl)
     end
 
-    return DATA', INDC', INDPL', M , N , A
+    return DATA, INDC, INDPL, M , N , A
 end
