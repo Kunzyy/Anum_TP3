@@ -43,9 +43,9 @@ function assemblage_CSR(N, jeuParam)
         u1 = u1_iii
     end
 
-    DATA = Int[]
-    INDC = Int[]
-    INDPL = Int[1]
+    DATA = Float64[]
+    INDC = Int64[]
+    INDPL = Int64[1]
 
     ##################################
     #Génération du vecteur INDPL

@@ -28,18 +28,17 @@ println(c)
 =#
 
 
-DATA, INDC, INDPL, b = assemblage_CSR(4, 1)
-println(DATA)
-println(INDC)
-println(INDPL)
-println(b)
+DATA, INDC, INDPL, b = assemblage_CSR(100, 1)
+#println(DATA)
+#println(INDC)
+#println(INDPL)
+#println(b)
 
-@time assemblage_CSR(100,1)
+#@time assemblage_CSR(100,1)
 
-
-A, b = assemblage_full(4, 1)
+A, b = assemblage_full(10, 1)
 println(A)
 println(b)
 
-@time assemblage_full(100, 1)
+#@time assemblage_full(100, 1)
 
