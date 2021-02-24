@@ -29,7 +29,7 @@ A = [3 1 0 2; 4 0 0 3; 1 2 0 0; 0 0 3 1]
 
 N = 5
 jeuParam = 2
-X = zeros(Int64, N^2-1)
+X = zeros(Float64, N^2-1)
 maxiter = 10*(N^2-1)
 tol = 1e-10
 
@@ -41,16 +41,13 @@ indc = indc'
 indpl = indpl'
 b = b'
 X = X'
-println(X)
 
 println(indc)
-println(size(indc))
 println(indpl)
-println(size(indpl))
 println(data)
-println(size(data))
 println(b)
 
+#=
 #Attention pour la full on utilise un X et un b vertical mais pour la parse un horizontal
 @time(println(grad_meth_CSR(data,indc,indpl,b,X,maxiter,tol)))
 println("Function 1 ok")
@@ -62,9 +59,9 @@ println("Function 2 ok")
 println("Function 3 ok")
 
 @time(println(conj_grad_meth_full(A,b',X',tol)))
-println("Function 4 ok")
+println("Function 4 ok")=#
 
-X = grad_meth_full(A,b',X',maxiter,tol)
+X = grad_meth_CSR(data,indc,indpl,b,X,maxiter,tol)
 
-println(A*X)
+println(A*X')
 
