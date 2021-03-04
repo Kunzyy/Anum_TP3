@@ -31,7 +31,7 @@ function grad_meth_CSR(data,indc,indpl,b,X,maxiter,tol)
         X = Xnew
         k +=1
     end
-    return X
+    return X'
 end
 #=
 indc = [1 2 4 1 4 1 2 3 4]

@@ -35,7 +35,7 @@ function conj_grad_meth_CSR(data,indc, indpl,b,X,tol)
         k +=1
     end
 
-    return X
+    return X'
 end
 
 #=

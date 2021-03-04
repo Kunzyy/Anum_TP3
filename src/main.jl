@@ -42,30 +42,41 @@ indpl = indpl'
 b = b'
 X = X'
 
-println(indc)
-println(indpl)
-println(data)
-println(b)
-
-#=
-#Attention pour la full on utilise un X et un b vertical mais pour la parse un horizontal
-@time(println(grad_meth_CSR(data,indc,indpl,b,X,maxiter,tol)))
-println("Function 1 ok")
-
-@time (println(grad_meth_full(A,b',X',maxiter,tol)))
-println("Function 2 ok")
-
-@time(println(conj_grad_meth_CSR(data,indc,indpl,b',X',tol)))
-println("Function 3 ok")
-
-@time(println(conj_grad_meth_full(A,b',X',tol)))
-println("Function 4 ok")=#
+println("indc : ",indc)
+println("indpl : ",indpl)
+println("data : ",data)
+println("b : " , b)
 
 
+println("\nMéthode du gradient CSR : ")
+@time(X1 = grad_meth_CSR(data,indc,indpl,b',X',maxiter,tol))
+println("X = " , X1 )
+b1 = A*X1
+println("Grad_CSR b = ",b1)
+println("Erreur sur b : ", abs.(b-b1'))
 
-#X = conj_grad_meth_full(A,b',X',tol)
+println("\nMéthode du gradient full : ")
+@time (X2 = grad_meth_full(A,b',X',maxiter,tol))
+println("X = " , X2)
+b2 = A*X2
+println("Grad_full b = ",b2)
+println("Erreur sur b : ", abs.(b-b2'))
+
+println("\nMéthode du gradient conjugué CSR : ")
+@time(X3 = conj_grad_meth_CSR(data,indc,indpl,b',X',tol))
+println("X = " , X3)
+b3 = A*X3
+println("Grad_conj_CSR b = ",b3)
+println("Erreur sur b : ", abs.(b-b3'))
+
+println("\nMéthode du gradient conjugué full : ")
+@time(X4 = conj_grad_meth_full(A,b',X',tol))
+println("X = " , X4)
+b4 = A*X4
+println("Grad_conj_full b = ", b4)
+println("Erreur sur b : ", abs.(b-b4'))
 
 
-#println(A*X)
+
 
 
