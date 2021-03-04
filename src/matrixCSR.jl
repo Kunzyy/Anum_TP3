@@ -26,5 +26,5 @@ function matrixCSR(A)
         push!(INDPL, indpl)
     end
 
-    return DATA, INDC, INDPL, M , N , A
+    return DATA', INDC', INDPL', M , N , A
 end

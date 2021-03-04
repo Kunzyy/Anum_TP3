@@ -8,6 +8,8 @@ include("prod_mat_vect_CSR.jl")
 using LinearAlgebra
 
 function grad_meth_CSR(data,indc,indpl,b,X,maxiter,tol)
+    b=b'
+    X=X'
     k = 0
     m,n = size(b) #Normalement la matrice doit avoir la même taille que b
     alpha = 0
@@ -41,4 +43,5 @@ maxiter = 10
 tol = 1e-6
 A = [3 1 0 2; 4 0 0 3; 1 2 0 0; 0 0 3 1]
 @time(println(grad_meth_CSR(data,indc,indpl,b,X,maxiter,tol)))
-println("Function 1 ok") =#
+println("Function 1 ok")
+=#

@@ -9,6 +9,8 @@ include("prod_mat_vect_CSR.jl")
 using LinearAlgebra
 
 function conj_grad_meth_CSR(data,indc, indpl,b,X,tol)
+    b = b'
+    X = X'
     k=0
     m,n = size(b)
     grad_x= prod_mat_vect_CSR(n , indpl , indc , data, X)-b #(1xn) - (1xn) => (1xn)
@@ -44,4 +46,4 @@ X = [2 1 1 0]
 b = [4 5 1 3]
 maxiter = 10
 tol = 1e-6
-@time(println(conj_grad_meth_CSR(data,indc,indpl,b,X,tol))) =#
+@time(println(conj_grad_meth_CSR(data,indc,indpl,b',X',tol)))=#

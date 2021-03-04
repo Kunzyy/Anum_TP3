@@ -7,9 +7,8 @@ main:
 include("matrixCSR.jl")
 import Pkg
 
-#print("Test")
 
-A = [3 1 0 2; 4 0 0 3; 1 2 0 0; 0 0 3 1]
+#A = [3 1 0 2; 4 0 0 3; 1 2 0 0; 0 0 3 1]
 #Réponse : A*X = [7 ; 8 ; 4 ; 3]
 
 #indc = [1 2 4 1 4 1 2 3 4]
@@ -32,18 +31,19 @@ function prod_mat_vect_CSR(n , indpl , indc , data, X)
         V[i] = temp
         temp = 0
     end
-    #print("Produit matrice sparse*vecteur : ", V , "\n")
+    #print("Résultat fonction matrice sparse : ", V , "\n")
     return V'
 end
 
 function result(X)
     result = A*X'
-    print(result)
+    #println("Résultat matrice normale : " , result)
 end
 
 #=
 data, indc, indpl , m , n , A = matrixCSR(A) #On récupère les résultats transposés
-print("Matrice : ", A , "\nSize : ", m , "x", n, "\ndata : ", data , " | indpl : " , indpl , " | indc : " , indc , "\n")
+print("Matrice : ", A , "\nSize de A : ", m , "x", n, "\ndata : ", data , " | indpl : " , indpl , " | indc : " , indc , "\n")
 @time(prod_mat_vect_CSR(4,indpl , indc,data, X))
 @time(result(X))
 =#
+

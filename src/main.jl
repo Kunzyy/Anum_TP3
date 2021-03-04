@@ -28,7 +28,7 @@ A = [3 1 0 2; 4 0 0 3; 1 2 0 0; 0 0 3 1]
 
 
 N = 5
-jeuParam = 1
+jeuParam = 2
 X = zeros(Float64, N^2-1)
 maxiter = 10*(N^2-1)
 tol = 1e-10
@@ -55,13 +55,17 @@ println("Function 1 ok")
 @time (println(grad_meth_full(A,b',X',maxiter,tol)))
 println("Function 2 ok")
 
-@time(println(conj_grad_meth_CSR(data,indc,indpl,b,X,tol)))
+@time(println(conj_grad_meth_CSR(data,indc,indpl,b',X',tol)))
 println("Function 3 ok")
 
 @time(println(conj_grad_meth_full(A,b',X',tol)))
 println("Function 4 ok")=#
 
-X = conj_grad_meth_full(A,b',X',tol)
 
-println(A*X)
+
+#X = conj_grad_meth_full(A,b',X',tol)
+
+
+#println(A*X)
+
 
