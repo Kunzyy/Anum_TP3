@@ -18,7 +18,8 @@ u0_ii(x) = 1 + x^2
 u1_ii(x) = 2 - x^2
 
 #Jeu de paramètres (iii)
-rho_iii(x, y) = 1 + 100 * (x + y)
+#On doit multiplier x et y par h (voir notation rapport)
+rho_iii(x, y, h) = 1 + 100 * (x*h + y*h)
 u0_iii(x) = 1
 u1_iii(x) = 2
 
@@ -42,6 +43,8 @@ function assemblage_CSR(N, jeuParam)
         u0 = u0_iii
         u1 = u1_iii
     end
+
+    h = 1/N
 
     DATA = Float64[]
     INDC = Int64[]
@@ -70,7 +73,8 @@ function assemblage_CSR(N, jeuParam)
                 indc = x + 1 + (y-1)*(N+1)
                 push!(INDC, indc)
 
-                data = -rho(x,y-1/2)
+                y = y+1 # rho doit être exprimé sur le point courant et pas son voisin (on re décale vers le point courant)
+                data = -rho(x,y-1/2,h)
                 push!(DATA, data)
             end
 
@@ -83,7 +87,8 @@ function assemblage_CSR(N, jeuParam)
                 indc = x + 1 + (y-1)*(N+1)
                 push!(INDC, indc)
 
-                data = -rho(x-1/2,y)
+                x = x+1 # rho doit être exprimé sur le point courant et pas son voisin (on re décale vers le point courant)
+                data = -rho(x-1/2,y,h)
                 push!(DATA, data)
             end
 
@@ -97,12 +102,12 @@ function assemblage_CSR(N, jeuParam)
 
             # S''il se retrouve sur le bord gauche
             if x == 0
-                data = rho(x,y-1/2) + rho(x+1/2,y) + rho(x,y+1/2)
+                data = rho(x,y-1/2,h)+ rho(x+1/2,y,h) + rho(x,y+1/2,h)
             #S'il se retrouve sur le bord droit
             elseif x == N
-                data = rho(x,y-1/2) + rho(x-1/2,y) + rho(x,y+1/2)
+                data = rho(x,y-1/2,h) + rho(x-1/2,y,h) + rho(x,y+1/2,h)
             else
-                data = rho(x,y-1/2) + rho(x-1/2,y) + rho(x+1/2,y) + rho(x,y+1/2)
+                data = rho(x,y-1/2,h) + rho(x-1/2,y,h) + rho(x+1/2,y,h) + rho(x,y+1/2,h)
             end
 
             push!(DATA, data)
@@ -116,7 +121,8 @@ function assemblage_CSR(N, jeuParam)
                 indc = x + 1 + (y-1)*(N+1)
                 push!(INDC, indc)
 
-                data = -rho(x+1/2,y)
+                x = x-1 # rho doit être exprimé sur le point courant et pas son voisin (on re décale vers le point courant)
+                data = -rho(x+1/2,y,h)
                 push!(DATA, data)
             end
 
@@ -129,7 +135,8 @@ function assemblage_CSR(N, jeuParam)
                 indc = x + 1 + (y-1)*(N+1)
                 push!(INDC, indc)
 
-                data = -rho(x,y+1/2)
+                y = y-1 # rho doit être exprimé sur le point courant et pas son voisin (on re décale vers le point courant)
+                data = -rho(x,y+1/2,h)
                 push!(DATA, data)
             end
         end
@@ -137,7 +144,7 @@ function assemblage_CSR(N, jeuParam)
 
     ##################################
     #Génération du vecteur b grâce aux expressions de u0 et u1
-    b = Int[]
+    b = Float64[]
     #Ligne u0
     for i in 0:N
         push!(b, u0(i))

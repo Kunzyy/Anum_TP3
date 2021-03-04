@@ -13,7 +13,7 @@ function assemblage_full(N, jeuParam)
 
     NN = size(INDPL,1) # NN = N^2-1
 
-    A = zeros(Int64, NN, NN)
+    A = zeros(Float64, NN, NN)
 
     # size(A,1) = size(INDC,1)
     nbreData = size(DATA,1)
