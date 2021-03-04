@@ -8,12 +8,12 @@ assemblage_CSR:
 include("getNENNL.jl")
 
 #Jeu de paramètres (i)
-rho_i(x, y) = 1
+rho_i(x, y, h) = 1
 u0_i(x) = 1
 u1_i(x) = 2
 
 #Jeu de paramètres (ii)
-rho_ii(x, y) = 1
+rho_ii(x, y, h) = 1
 u0_ii(x) = 1 + x^2
 u1_ii(x) = 2 - x^2
 
