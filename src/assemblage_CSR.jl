@@ -97,10 +97,10 @@ function assemblage_CSR(N, jeuParam)
 
             # Si il se retrouve sur le bord gauche
             if x == 0
-                data = rho(x-1/2,y) + rho(x+1/2,y) + rho(x,y+1/2)
+                data = rho(x,y-1/2) + rho(x+1/2,y) + rho(x,y+1/2)
             #Si il se retrouve sur le bord droit
             elseif x == N
-                data = rho(x,y-1/2) + rho(x-1/2,y) + rho(x+1/2,y)
+                data = rho(x,y-1/2) + rho(x-1/2,y) + rho(x,y+1/2)
             else
                 data = rho(x,y-1/2) + rho(x-1/2,y) + rho(x+1/2,y) + rho(x,y+1/2)
             end
