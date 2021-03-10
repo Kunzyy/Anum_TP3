@@ -22,13 +22,13 @@ function conj_grad_meth_CSR(data,indc, indpl,b,X,tol)
         X = X + alpha*d
 
         if norm(grad_x) < tol
-            return X
+            return X'
         end
 
         #Nouvelle direction
         grad_xnew = prod_mat_vect_CSR(n , indpl , indc , data, X)-b
 
-        bheta = norm(grad_xnew,2)/norm(grad_x,2)
+        bheta = norm(grad_xnew,2)^2/norm(grad_x,2)^2
 
         d = -grad_xnew + bheta * d #(1xn) + scal * (1xn) => (1xn)'
         grad_x = grad_xnew #Pour redémarrer la boucle il faut remettre le nouveau grad dans le gradient de base

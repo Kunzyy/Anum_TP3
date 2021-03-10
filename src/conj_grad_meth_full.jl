@@ -8,10 +8,10 @@ conj_grad_meth_full:
 using LinearAlgebra
 function conj_grad_meth_full(A,b,X,tol)
     k=0
-    n = size(b) #vecteur vertical donc il ne retourne qu'un seul argument de taille
+    n = size(b,1) #vecteur vertical
     grad_x= A*X-b #(nxn)*(nx1) - (nx1) => (nx1)
     d = - grad_x #d(nx1)
-    while k < n[1] #Car il converge au plus en n itérés
+    while k < n #Car il converge au plus en n itérés
         num = -d'*grad_x #(nx1)'*(nx1) => scal
         den = d'* (A*d) #(nx1)'* ((nxn)*(nx1)) =>scal
         alpha = num[1]/den[1] #num et den sont des scalaires mais il sont renvoyés sous forme d'un array 1x1'
@@ -23,8 +23,7 @@ function conj_grad_meth_full(A,b,X,tol)
 
         #Nouvelle direction
         grad_xnew = A*X -b #(nx1)
-
-        bheta = norm(grad_xnew,2)/norm(grad_x,2)
+        bheta = norm(grad_xnew,2)^2/norm(grad_x,2)^2
 
         d = -grad_xnew + bheta * d #(nx1) + scal * (nx1) => (nx1)'
         grad_x = grad_xnew #Pour redémarrer la boucle il faut remettre le nouveau grad dans le gradient de base
