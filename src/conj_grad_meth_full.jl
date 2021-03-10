@@ -23,9 +23,9 @@ function conj_grad_meth_full(A,b,X,tol)
 
         #Nouvelle direction
         grad_xnew = A*X -b #(nx1)
-        bheta = norm(grad_xnew,2)^2/norm(grad_x,2)^2
+        beta = norm(grad_xnew,2)^2/norm(grad_x,2)^2
 
-        d = -grad_xnew + bheta * d #(nx1) + scal * (nx1) => (nx1)'
+        d = -grad_xnew + beta * d #(nx1) + scal * (nx1) => (nx1)'
         grad_x = grad_xnew #Pour redémarrer la boucle il faut remettre le nouveau grad dans le gradient de base
         k +=1
     end
