@@ -28,7 +28,7 @@ A = [3 1 0 2; 4 0 0 3; 1 2 0 0; 0 0 3 1]
 
 
 N = 5
-jeuParam = 2
+jeuParam = 1
 X = zeros(Float64, N^2-1)
 maxiter = 10*(N^2-1)
 tol = 1e-10

@@ -12,7 +12,7 @@ function conj_grad_meth_CSR(data,indc, indpl,b,X,tol)
     b = b'
     X = X'
     k=0
-    m,n = size(b)
+    n = size(b,2)
     grad_x= prod_mat_vect_CSR(n , indpl , indc , data, X)-b #(1xn) - (1xn) => (1xn)
     d = - grad_x #d(1xn)
     while k < n #Car il converge au plus en n itérés

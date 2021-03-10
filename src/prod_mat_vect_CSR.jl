@@ -20,10 +20,14 @@ function prod_mat_vect_CSR(n , indpl , indc , data, X)
     compt = 1
     V = zeros(n)
     temp = 0
-    indplm , indpln = size(indpl)
-    for i = 1:indpln
-    start = indpl[i]
-    finish = indpl[i+1]-1
+    for i = 1:size(indpl,2)
+        start = indpl[i]
+        if i == size(indpl,2)
+            finish = size(data,2)
+        else
+            finish = indpl[i+1]-1
+        end
+
         for j = start:finish
             r= indc[j]
             temp = temp + data[j]*X[r]

@@ -11,7 +11,7 @@ function grad_meth_CSR(data,indc,indpl,b,X,maxiter,tol)
     b=b'
     X=X'
     k = 0
-    m,n = size(b) #Normalement la matrice doit avoir la même taille que b
+    n = size(b,2) #Normalement la matrice doit avoir la même taille que b
     alpha = 0
     d=-(prod_mat_vect_CSR(n , indpl , indc , data, X)-b) #attention il faut mettre la taille de la matrice nxn
 
