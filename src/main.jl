@@ -27,7 +27,7 @@ A = [3 1 0 2; 4 0 0 3; 1 2 0 0; 0 0 3 1]
 =#
 println("START\n")
 
-N = 10
+N = 3
 jeuParam = 1
 X = zeros(Float64, N^2-1)
 maxiter = 10*(N^2-1)
@@ -58,15 +58,6 @@ println("data : ",data)
 println("A : ", A)
 println("b : " , b)
 =#
-
-X1 = grad_meth_CSR(data,indc,indpl,b,X,maxiter,tol)
-println("OK1")
-X2 = grad_meth_full(A,b,X,maxiter,tol)
-println("OK2")
-X3 = conj_grad_meth_CSR(data,indc,indpl,b,X,tol)
-println("OK3")
-X4 = conj_grad_meth_full(A,b,X,tol)
-println("OK4")
 
 println("\nMéthode du gradient CSR : ")
 @time(X1 = grad_meth_CSR(data,indc,indpl,b,X,maxiter,tol))
