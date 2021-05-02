@@ -25,9 +25,9 @@ maxiter = 10
 tol = 1e-6
 A = [3 1 0 2; 4 0 0 3; 1 2 0 0; 0 0 3 1]
 =#
+println("START\n")
 
-
-N = 5
+N = 10
 jeuParam = 1
 X = zeros(Float64, N^2-1)
 maxiter = 10*(N^2-1)
@@ -36,47 +36,69 @@ tol = 1e-10
 data, indc, indpl, b = assemblage_CSR(N, jeuParam)
 A, b = assemblage_full(N, jeuParam)
 
+#=
+println("Calcul et stockage des matrices CSR et full initiales")
+@time(assemblage_CSR(N,jeuParam))
+@time(assemblage_full(N,jeuParam))
+=#
+
 data = data'
 indc = indc'
 indpl = indpl'
-b = b'
-X = X'
 
+#=
+@time(prod_mat_vect_CSR(size(b,1),indpl, indc, data, b))
+@time(A*b)
+=#
+
+#=
 println("indc : ",indc)
 println("indpl : ",indpl)
 println("data : ",data)
+println("A : ", A)
 println("b : " , b)
+=#
 
+X1 = grad_meth_CSR(data,indc,indpl,b,X,maxiter,tol)
+println("OK1")
+X2 = grad_meth_full(A,b,X,maxiter,tol)
+println("OK2")
+X3 = conj_grad_meth_CSR(data,indc,indpl,b,X,tol)
+println("OK3")
+X4 = conj_grad_meth_full(A,b,X,tol)
+println("OK4")
 
 println("\nMéthode du gradient CSR : ")
-@time(X1 = grad_meth_CSR(data,indc,indpl,b',X',maxiter,tol))
-println("X = " , X1 )
+@time(X1 = grad_meth_CSR(data,indc,indpl,b,X,maxiter,tol))
+#println("X = " , X1 )
 b1 = A*X1
-println("Grad_CSR b = ",b1)
-println("Erreur sur b : ", abs.(b-b1'))
+#println("Grad_CSR b = ",b1')
+#println("Erreur sur b : ", abs.(b'-b1'))
+println("Erreur totale : ", sum(abs.(b-b1)))
 
 println("\nMéthode du gradient full : ")
-@time (X2 = grad_meth_full(A,b',X',maxiter,tol))
-println("X = " , X2)
+@time (X2 = grad_meth_full(A,b,X,maxiter,tol))
+#println("X = " , X2)
 b2 = A*X2
-println("Grad_full b = ",b2)
-println("Erreur sur b : ", abs.(b-b2'))
+#println("Grad_full b = ",b2')
+#println("Erreur sur b : ", abs.(b'-b2'))
+println("Erreur totale : ", sum(abs.(b-b2)))
 
 println("\nMéthode du gradient conjugué CSR : ")
-@time(X3 = conj_grad_meth_CSR(data,indc,indpl,b',X',tol))
-println("X = " , X3)
+@time(X3 = conj_grad_meth_CSR(data,indc,indpl,b,X,tol))
+#println("X = " , X3)
 b3 = A*X3
-println("Grad_conj_CSR b = ",b3)
-println("Erreur sur b : ", abs.(b-b3'))
+#println("Grad_conj_CSR b = ",b3')
+#println("Erreur sur b : ", abs.(b'-b3'))
+println("Erreur totale : ", sum(abs.(b-b3)))
 
 println("\nMéthode du gradient conjugué full : ")
-@time(X4 = conj_grad_meth_full(A,b',X',tol))
-println("X = " , X4)
+@time(X4 = conj_grad_meth_full(A,b,X,tol))
+#println("X = " , X4)
 b4 = A*X4
-println("Grad_conj_full b = ", b4)
-println("Erreur sur b : ", abs.(b-b4'))
+#println("Grad_conj_full b = ", b4')
+#println("Erreur sur b : ", abs.(b'-b4'))
+println("Erreur totale : ", sum(abs.(b-b4)))
 
-
-
-
+println("\nEND")
 

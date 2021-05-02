@@ -18,16 +18,16 @@ function assemblage_full(N, jeuParam)
     # size(A,1) = size(INDC,1)
     nbreData = size(DATA,1)
 
-    compt = 1
     i = 1
 
     for k in 1:nbreData
         j = INDC[k]
         A[i,j] = DATA[k]
-        compt += 1
 
-        if INDPL[i+1] == compt
-            i += 1
+        if i != NN
+            if INDPL[i+1] == k+1
+                i += 1
+            end
         end
     end
 

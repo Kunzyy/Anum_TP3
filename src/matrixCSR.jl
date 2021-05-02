@@ -9,8 +9,7 @@ function matrixCSR(A)
 
     M,N = size(A)
 
-
-    DATA = Int[]
+    DATA = Float64[]
     INDC = Int[]
     INDPL = Int[1]
 
